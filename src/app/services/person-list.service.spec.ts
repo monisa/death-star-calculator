@@ -13,6 +13,11 @@ describe('PersonListService', () => {
     });
   });
 
+  afterEach(() => {
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    httpTestingController.verify();
+  });
+
   it('should make a GET request and return data', () => {
     const mockData = {
       name: 'Tatooine',
