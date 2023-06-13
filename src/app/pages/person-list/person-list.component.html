@@ -1,0 +1,25 @@
+<div class="section">
+    <button routerLink="/calculator" mat-raised-button color="primary"><mat-icon>add</mat-icon>Neue Berechnung</button>
+
+    <h3>Bisherige Berechnungen</h3>
+
+    <table mat-table [dataSource]="previousCalculation" *ngIf="previousCalculation.length > 0; else Nodata">
+        <!-- Person Column -->
+        <ng-container matColumnDef="person">
+            <th mat-header-cell *matHeaderCellDef> Personen </th>
+            <td mat-cell *matCellDef="let element"> {{element.person}} </td>
+        </ng-container>
+
+        <!-- volume Column -->
+        <ng-container matColumnDef="volume">
+            <th mat-header-cell *matHeaderCellDef> Volume der Planeten</th>
+            <td mat-cell *matCellDef="let element"> {{element.volume}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <ng-template #Nodata>
+        No Previous Calculation. Click on Neue Berechnung to calculate.
+    </ng-template>
+</div>

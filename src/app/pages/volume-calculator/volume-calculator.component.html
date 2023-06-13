@@ -1,0 +1,45 @@
+<div class="section">
+    <h3>Suche in Personen-Datenbank</h3>
+
+    <form>
+        <mat-form-field>
+
+            <input #inputField type="text" placeholder="Personen" aria-label="Personen" matInput
+                [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions" [value]="enemyList">
+                    <div (click)="optionClicked($event, option)">
+                        <mat-checkbox [checked]="option.selected" (change)="toggleSelection(option)"
+                            (click)="$event.stopPropagation()">
+                            {{ option.name }}
+                        </mat-checkbox>
+                    </div>
+                </mat-option>
+                <mat-option *ngIf="noData">No Data Available</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <h4>Enemy List: </h4>
+
+        <mat-list dense>
+            <mat-list-item *ngIf="enemyList?.length === 0">No enemyList</mat-list-item>
+            <mat-list-item *ngFor="let enemy of enemyList">
+                {{ enemy.name }}
+            </mat-list-item>
+        </mat-list>
+
+        <div class="calculate-section">
+            <button mat-raised-button name="data" type="button" color="primary" (click)="calculation()"
+                [disabled]="enemyList.length === 0"><mat-icon>calculate</mat-icon>Volumen
+                Berechnen</button>
+
+            <p class="volume">Das Volumen der Planeten beträgt <span class="volume-value">{{grantTotal}}
+                    km<sup>3</sup></span></p>
+
+            <button [disabled]="enemyList.length === 0" (click)="goPreviousCalculation()" mat-raised-button
+                color="primary"><mat-icon>arrow_back</mat-icon>Berechnung
+                Übernehmen</button>
+        </div>
+
+    </form>
+</div>

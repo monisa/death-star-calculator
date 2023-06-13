@@ -1,10 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { VolumeCalculatorComponent } from './pages/volume-calculator/volume-calculator.component';
+import { PersonListComponent } from './pages/person-list/person-list.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: PersonListComponent,
+  },
+  {
+    path: 'calculator',
+    component: VolumeCalculatorComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

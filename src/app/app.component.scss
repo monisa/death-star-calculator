@@ -1,0 +1,26 @@
+.page {
+    width: 100%;
+    .header {
+        background-image: linear-gradient(rgb(139, 173, 227), rgb(0, 72, 255));
+        color: white;
+        display: flex;
+        padding: 1em;
+        .logo {
+                flex: 1;
+            }
+        .title {
+            flex: 11;
+            text-align: center;
+            padding-top: 1em;
+            font-size: 20px;
+        }
+    }
+    .content {
+        width: 70%;
+        margin: 2em auto;
+        padding: 2em;
+        display: flex;
+        justify-content: center;
+    }
+   
+}
