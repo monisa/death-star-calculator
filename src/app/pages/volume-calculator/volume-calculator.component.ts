@@ -65,27 +65,43 @@ export class VolumeCalculatorComponent {
     this.selectedPlanetData.totalVolume = [];
     this.selectedPlanetData.people = [];
     const tempDiameter: any = [];
-    for (const enemy of this.enemyList) {
-      try {
-        const planetData = await firstValueFrom(
-          this.getPlanetData(enemy.homeworld)
-        );
+    this.enemyList.map((enemy) => {
+      this.http.get(enemy.homeworld).subscribe((planetData: any) => {
         this.selectedPlanetData.people.push(enemy);
-
         if (!tempDiameter.includes(planetData.diameter)) {
           tempDiameter.push(planetData.diameter);
           const radius = Math.floor(planetData.diameter / 2);
           this.getVolume(radius);
           this.grantTotal = this.selectedPlanetData.totalVolume.reduce(
-            (partialSum: number, a: number) => partialSum + a,
+            (sum: number, a: number) => sum + a,
             0
           );
         }
         console.log(this.selectedPlanetData);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+      });
+    });
+
+    // for (const enemy of this.enemyList) {
+    //   try {
+    //     const planetData = await firstValueFrom(
+    //       this.getPlanetData(enemy.homeworld)
+    //     );
+    //     this.selectedPlanetData.people.push(enemy);
+
+    //     if (!tempDiameter.includes(planetData.diameter)) {
+    //       tempDiameter.push(planetData.diameter);
+    //       const radius = Math.floor(planetData.diameter / 2);
+    //       this.getVolume(radius);
+    //       this.grantTotal = this.selectedPlanetData.totalVolume.reduce(
+    //         (partialSum: number, a: number) => partialSum + a,
+    //         0
+    //       );
+    //     }
+    //     console.log(this.selectedPlanetData);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
   }
 
   public getVolume(radius: any) {
